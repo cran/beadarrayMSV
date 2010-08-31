@@ -1,0 +1,16 @@
+citHeader("To cite package beadarrayMSV in publications use:")
+
+citEntry(entry="unpublished",
+    title = "Genotype calling and mapping of multisite variants using
+    an {A}tlantic salmon i{S}elect {SNP}-array",
+    author = "Lars Gidskehaug and Matthew Kent and Ben Hayes and
+    Sigbjorn Lien",
+    note  = "Submitted",
+    textVersion = paste("Gidskehaug, L., Kent, M., Hayes, B., Lien, S.",
+    		"Genotype calling and mapping of multisite variants using an",
+		"Atlantic salmon iSelect SNP-array. Submitted")
+    )
+
+citFooter("This free software implements academic research by the
+authors and co-workers. If you use it, please support the project by
+citing the given manuscript")

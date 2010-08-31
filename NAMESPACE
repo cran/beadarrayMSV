@@ -1,0 +1,16 @@
+import(Biobase)
+import(rggobi)
+import(geneplotter)
+
+importFrom(limma, normalizeQuantiles)
+
+exportClasses(BeadSetIllumina, AlleleSetIllumina)
+
+exportMethods("[", "[[", "$", annotation, combine, experimentData, featureNames, 
+              pData, phenoData, sampleNames, featureData, "annotation<-",
+              "description<-", "experimentData<-", "featureNames<-", "pData<-",
+              "phenoData<-", "sampleNames<-", "assayData<-", "featureData<-",
+              fData, "fData<-", dim, assayData, initialize, show, varMetadata,
+              "varMetadata<-", fvarMetadata, "fvarMetadata<-")
+
+exportPattern("^[^\\.]")
