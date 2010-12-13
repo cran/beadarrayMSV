@@ -48,7 +48,7 @@ setValidity("AlleleSetIllumina", function(object) {
 
 
 #Reads iScan's summary files. Uses code from 'readIllumina()' {beadarray}
-readBeadSummaryOutput <- function(arrayNames=NULL,path='.',pattern='beadTypeFile.txt',recursive=FALSE,sep=',',fullPaths=NULL,sepchar='_'){
+readBeadSummaryOutput <- function(arrayNames=NULL,path='.',pattern='beadTypeFile.txt',recursive=FALSE,sep=',',fullPaths=NULL,sepchar='_',prList=NULL){
   #Locate files
   if (is.null(fullPaths))
     fullPaths <- dir(path=path,pattern=pattern,recursive=recursive)
@@ -80,7 +80,7 @@ readBeadSummaryOutput <- function(arrayNames=NULL,path='.',pattern='beadTypeFile
   }
   nArrays <- length(arrays)
   message('Found ', nArrays, ' arrays')
-
+  
   #Prepare phenoData
   arrayInfo <- data.frame(arrayNames=as.character(arrays),no.beads=rep(0,nArrays),stringsAsFactors=FALSE,row.names=arrays)
   if (length(grep(sepchar,arrays)) == nArrays){
@@ -97,7 +97,7 @@ readBeadSummaryOutput <- function(arrayNames=NULL,path='.',pattern='beadTypeFile
   }
   labelDesc <- c('Array ID','No. detected beads','Chip ID','Array ID within chip','Strip ID within array')
   phenoMetadata <- data.frame(labelDescription=labelDesc,row.names=colnames(arrayInfo))
-
+  
   #Read assayData
   filesFull <- file.path(path, paste(rPaths,rFiles,sep=""))
   fc <- file(filesFull[1],open="r")
@@ -105,18 +105,29 @@ readBeadSummaryOutput <- function(arrayNames=NULL,path='.',pattern='beadTypeFile
   if (!all(unlist(header)==c("Illumicode","N","Mean GRN","Dev GRN","Mean RED","Dev RED")))
     stop(paste('Unknown fields in header:',header))
   dat <- scan(file=fc,sep=sep,quiet=TRUE,
-    what=list(ProbeID=integer(0),no.beads=integer(0),G=integer(0),sd.G=integer(0),
-      R=integer(0),sd.R=integer(0)))
+              what=list(ProbeID=integer(0),no.beads=integer(0),G=integer(0),sd.G=integer(0),
+                R=integer(0),sd.R=integer(0)))
   close(fc)
-  prList <- dat$ProbeID
+  if (is.null(prList)){
+    prList <- dat$ProbeID
+  }
+  if (length(prList)>length(dat$ProbeID)){
+    stop(paste('The array',arrays[1],'contains fewer probes than specified in "prList"'))
+  }else if (length(prList)<length(dat$ProbeID)){
+    warning(paste('The array',arrays[1],'contains more probes than specified in "prList"'))
+  }
+  indP <- dat$ProbeID %in% prList #sapply(prList,function(x,ProbeID) which(ProbeID%in%x)[1],dat$ProbeID)
+  if (!identical(prList,dat$ProbeID[indP])){
+    stop(paste('The markers in array',arrays[1],'deviate from those in "prList"\n or are sorted differently.'))
+  }
   nProbes <- length(prList)
   G <- se.G <- R <- se.R <- no.beads <-
     matrix(nrow=nProbes,ncol=nArrays,dimnames=list(prList,arrays))
-  G[,1] <- dat$G
-  se.G[,1] <- dat$sd.G/sqrt(dat$no.beads)
-  R[,1] <- dat$R
-  se.R[,1] <- dat$sd.R/sqrt(dat$no.beads)
-  no.beads[,1] <- dat$no.beads
+  G[,1] <- dat$G[indP]
+  se.G[,1] <- dat$sd.G[indP]/sqrt(dat$no.beads[indP])
+  R[,1] <- dat$R[indP]
+  se.R[,1] <- dat$sd.R[indP]/sqrt(dat$no.beads[indP])
+  no.beads[,1] <- dat$no.beads[indP]
   if (nArrays>1){
     for (i in 2:nArrays){
       fc <- file(filesFull[i],open="r")
@@ -124,14 +135,14 @@ readBeadSummaryOutput <- function(arrayNames=NULL,path='.',pattern='beadTypeFile
         what=list(ProbeID=integer(0),no.beads=integer(0),G=integer(0),sd.G=integer(0),
           R=integer(0),sd.R=integer(0)))
       close(fc)
-      if (identical(prList,dat$ProbeID)){#any(prList!=dat$ProbeID)){
+      if (identical(prList,dat$ProbeID)){
         indP <- rep(TRUE,nProbes)
       }else{
         indP <- dat$ProbeID %in% prList
         if (!identical(prList,dat$ProbeID[indP])){
-          stop(paste('Different probe-sets! Arrays',arrays[1],'and',arrays[i],'cannot be merged'))
+          stop(paste('Different probe-sets!\n',length(prList),'probes in "prList",',length(dat$ProbeID),'probes in array',arrays[i]))
         }
-        warning(paste('Arrays',arrays[1],'and',arrays[i],'contain different probes'))
+        warning(paste('The array',arrays[i],'contains more probes than specified in "prList"'))
       }
       G[,i] <- dat$G[indP]
       se.G[,i] <- dat$sd.G[indP]/sqrt(dat$no.beads[indP])
@@ -741,6 +752,7 @@ createAlleleSetFromFiles <- function(dataFiles,markers,arrays,phenoInfo=NULL,bea
   if ('phFile' %in% names(dataFiles)){
     message("Loading phenoData (ignoring 'phenoInfo'-argument) ...")
     phenoInfo <- read.table(dataFiles[['phFile']],header=TRUE,sep=sep,quote=quote,as.is=TRUE)
+    phenoInfo$noiseIntensity <- as.numeric(phenoInfo$noiseIntensity)
   }else if(is.null(phenoInfo)){
     stop("No available phenoData. Provide 'phenoInfo'-table or 'phFile'-filename")
   }
@@ -763,13 +775,13 @@ createAlleleSetFromFiles <- function(dataFiles,markers,arrays,phenoInfo=NULL,bea
   colClasses[markers+1] <- 'numeric'
   orderM <- order(sort(markers,index.return=TRUE)$ix)
   message('Loading intensities...')
-  intensity <- t(read.table(dataFiles[['intFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrow=max(arrays)))
+  intensity <- t(read.table(dataFiles[['intFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrows=max(arrays)))
   intensity <- intensity[orderM,arrays]
   message('Loading thetas...')
-  theta <- t(read.table(dataFiles[['thFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrow=max(arrays)))
+  theta <- t(read.table(dataFiles[['thFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrows=max(arrays)))
   theta <- theta[orderM,arrays]
   message('Loading standard errors...')
-  SE <- t(read.table(dataFiles[['seFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrow=max(arrays)))
+  SE <- t(read.table(dataFiles[['seFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrows=max(arrays)))
   SE <- SE[orderM,arrays]
   BSRed <- new('AlleleSetIllumina', intensity=intensity, theta=theta, SE=SE, phenoData=phenoData, featureData=featureData)
   rm('intensity','theta','SE','phenoData','featureData'); gc()
@@ -871,21 +883,21 @@ createMultiSetFromFiles <- function(dataFiles,markers,arrays,phenoInfo=NULL,bead
   orderM <- order(sort(markers,index.return=TRUE)$ix)
   if ('intFile' %in% names(dataFiles)){
     message('Loading intensities...')
-    intensity <- t(read.table(dataFiles[['intFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrow=max(arrays)))
+    intensity <- t(read.table(dataFiles[['intFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrows=max(arrays)))
     intensity <- intensity[orderM,arrays]
   }else{
     intensity <- NULL
   }
   if ('thFile' %in% names(dataFiles)){
     message('Loading thetas...')
-    theta <- t(read.table(dataFiles[['thFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrow=max(arrays)))
+    theta <- t(read.table(dataFiles[['thFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrows=max(arrays)))
     theta <- theta[orderM,arrays]
   }else{
     theta <- NULL
   }
   if ('seFile' %in% names(dataFiles)){
     message('Loading standard errors...')
-    SE <- t(read.table(dataFiles[['seFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrow=max(arrays)))
+    SE <- t(read.table(dataFiles[['seFile']],header=TRUE,sep=sep,quote=quote,colClasses=colClasses,nrows=max(arrays)))
     SE <- SE[orderM,arrays]
   }else{
     SE <- NULL
@@ -1001,9 +1013,10 @@ callGenotypes <- function(BSRed,gO=setGenoOptions(largeSample=ncol(BSRed)>250)){
     count <- count + 1
     if (count %in% seq(min(100,nKeep),nKeep,100))
       message('Called ',count,' of ',nKeep,' genotypes')
-    iMiss <- is.na(R[i,])|is.na(SE[i,])
+    iMiss <- is.na(R[i,])|is.na(SE[i,])|is.na(Theta[i,])
     iDet <- R[i,]>mNoise & !iMiss & Theta[i,]>-.5 & Theta[i,]<1.5    #Filter bad samples
-    if (sum(iDet)<=sum(iArrays)*gO$detectLim){
+    #if (sum(iDet)<=sum(iArrays)*gO$detectLim){
+    if (sum(iDet)<=sum(!iMiss)*gO$detectLim){
       fData$Classification[iSnps][[i]] <- 'FAIL'
     }else{
       sclR <- median(R[i,iDet],na.rm=TRUE)*2*gO$rPenalty                   #Factor by which R is divided before clustering
@@ -1091,7 +1104,8 @@ callGenotypes <- function(BSRed,gO=setGenoOptions(largeSample=ncol(BSRed)>250)){
                   points(clCtrs[,1],clCtrs[,2],col='green',pch=16)    #cluster-centres
                 }
                 indKeep <- indKeep &! indOverlap
-                tmpRes[7] <- sum(indKeep)/sum(iArrays)
+                #tmpRes[7] <- sum(indKeep)/sum(iArrays)
+                tmpRes[7] <- sum(indKeep)/sum(!iMiss)
                                         #psRat <- prod(Sratio[clObj$size>ncol(BSRed)/10])
                 psRat <- sum(Sratio*clObj$size)/(ncol(BSRed)*nClRed)
                                         #goodSNP <- goodSNP & sum(!indOverlap)==sum(iDet)
@@ -1145,7 +1159,7 @@ callGenotypes.verboseTest <- function(BSRed,singleMarker=1,gO=setGenoOptions(lar
   message(sprintf("Verbosely analyzing marker '%s'",featureNames(BSRed)[singleMarker]))
   iSnps <- apply(assayData(BSRed)$theta,1,function(x,cc) sum(!is.na(x))>cc,cc=gO$arrayPerSnpLim*ncol(BSRed))
   if (!iSnps[singleMarker]){
-    message('The selected marker would be discarded due to many missings!')
+    message('Failure as the ratio of missing arrays exceeds (1 - "arrayPerSnpLim")')
   }
   iSnps <- singleMarker
   iArrays <- apply(assayData(BSRed)$theta,2,function(x,cc) sum(!is.na(x))>cc,cc=gO$snpPerArrayLim*nrow(BSRed))
@@ -1177,11 +1191,13 @@ callGenotypes.verboseTest <- function(BSRed,singleMarker=1,gO=setGenoOptions(lar
   #            'Large value (>1) means increasingly slanting clusters')
   #fMetadata <- data.frame(labelDescription=fDesc, row.names=colnames(fData), stringsAsFactors=FALSE)
 
-  iMiss <- is.na(R)|is.na(SE)
-  iDet <- R>mNoise & !iMiss & Theta>-.5 & Theta<1.5    #Filter bad samples
-  message(sprintf('%d additional low-quality samples are filtered away for this marker',sum(!iDet)))
-  if (sum(iDet)<=sum(iArrays)*gO$detectLim){
-    message('This marker fails due to many low-quality samples')
+  iMiss <- is.na(R)|is.na(SE)|is.na(Theta)
+  iDet <- R>mNoise & !iMiss & Theta>-.5 & Theta<1.5    #Filter bad arrays
+  message(sprintf('%d low-quality or missing array(s) filtered away for this marker',sum(!iDet)))
+  #if (sum(iDet)<=sum(iArrays)*gO$detectLim){
+  if (sum(iDet)<=sum(!iMiss)*gO$detectLim){
+    str <- 'Failure as rate of high quality to non-missing arrays (%.2f) smaller than "detectLim"'
+    message(sprintf(str,sum(iDet)/sum(!iMiss)))
   }else{
     sclR <- median(R[iDet],na.rm=TRUE)*2*gO$rPenalty                   #Factor by which R is divided before clustering
     X <- matrix(cbind(Theta,R/sclR,SE)[iDet,],ncol=3)
@@ -1235,7 +1251,6 @@ callGenotypes.verboseTest <- function(BSRed,singleMarker=1,gO=setGenoOptions(lar
         iCl <- which(clObj$size>0)
         #fData[current.i,1] <- max(abs(cntIdeal[iCl]-clObj$centers[iCl,1]))   #Max cluster-centre deviation (Theta)
         fData[iConf,1] <- max(abs(cntIdeal[iCl]-clObj$centers[iCl,1]))   #Max cluster-centre deviation (Theta)
-                                        #fData[current.i,1] <- mean(abs(cntIdeal[iCl]-clObj$centers[iCl,1]))   #Max cluster-centre deviation (Theta)
         wSpread <- tapply(X[,1],clObj$cluster,sd)   #NB! MAD?
         wSpread[clObj$size[iCl]<2] <- 0   #use gO$minClLim instead?
         #fData[current.i,2] <- max(wSpread)  #Max within-cluster spread (Theta)
@@ -1291,7 +1306,8 @@ callGenotypes.verboseTest <- function(BSRed,singleMarker=1,gO=setGenoOptions(lar
         #fData[current.i,7] <- sum(indKeep)/sum(iArrays)
         #fData[current.i,9] <- sum(Sratio*clObj$size)/(ncol(BSRed)*nClRed)
         #call[current.i,iArrays][iDet][indKeep] <- cntIdeal[clObj$cluster][indKeep]
-        fData[iConf,7] <- sum(indKeep)/sum(iArrays)
+        #fData[iConf,7] <- sum(indKeep)/sum(iArrays)
+        fData[iConf,7] <- sum(indKeep)/sum(!iMiss)
         fData[iConf,9] <- sum(Sratio*clObj$size)/(ncol(BSRed)*nClRed)
         call[iConf,iArrays][iDet][indKeep] <- cntIdeal[clObj$cluster][indKeep]
       } #end if (!any(clObj$size))
@@ -2536,7 +2552,7 @@ setNormOptions <- function(shearInf1=TRUE,transf='root',method='medianAF',minSiz
 #largeSample==FALSE calibrated for 100 objects.
 #Calibrated for transf='root'; if transf='none', increase devCentLim and wSpreadLim
 #Earlier versions: mseLim=1, probsQRange=c(.01,.5,.99)
-setGenoOptions <- function(largeSample=FALSE,snpPerArrayLim=.8,arrayPerSnpLim=.8,ploidy='tetra',filterLim=0,detectLim=.8,wSpreadLim=suggestGeno(largeSample)$wSpreadLim,devCentLim=.35,hwAlpha=suggestGeno(largeSample)$hwAlpha,probsIndSE=suggestGeno(largeSample)$probsIndSE,afList=seq(0,.5,.05),clAlpha=suggestGeno(largeSample)$clAlpha,rPenalty=2,rotationLim=suggestGeno(largeSample)$rotationLim,minClLim=5,nSdOverlap=2,minBin=suggestGeno(largeSample)$minBin,binWidth=suggestGeno(largeSample)$binWidth){
+setGenoOptions <- function(largeSample=FALSE,snpPerArrayLim=.8,arrayPerSnpLim=0,ploidy='tetra',filterLim=0,detectLim=.8,wSpreadLim=suggestGeno(largeSample)$wSpreadLim,devCentLim=.35,hwAlpha=suggestGeno(largeSample)$hwAlpha,probsIndSE=suggestGeno(largeSample)$probsIndSE,afList=seq(0,.5,.05),clAlpha=suggestGeno(largeSample)$clAlpha,rPenalty=2,rotationLim=suggestGeno(largeSample)$rotationLim,minClLim=5,nSdOverlap=2,minBin=suggestGeno(largeSample)$minBin,binWidth=suggestGeno(largeSample)$binWidth){
   suggestGeno <- function(largeSample){
     opt <- NULL
     if (largeSample){

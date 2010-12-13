@@ -1,8 +1,28 @@
+Changes in version 1.0.4
+
+2010-12-14  Lars Gidskehaug  <lg at camo.no>
+
+	* R/beadarrayMSV.R (createMultiSetFromFiles): Changed partial
+	argument matches 'nrow' to 'nrows'
+	* R/beadarrayMSV.R (createAlleleSetFromFiles): Changed partial
+	argument matches 'nrow' to 'nrows'. Enforced numeric
+	'noiseIntensity' in phenoInfo
+	* R/beadarrayMSV.R (readBeadSummaryOutput): Additional input
+	parameter 'prList' in order to cope with varying number of probes
+	on different arrays
+	* R/beadarrayMSV.R (callGenotypes.verboseTest): More informative
+	output 
+	* R/beadarrayMSV.R (setGenoOptions): Default "arrayPerSnpLim"
+	set to zero, as this is covered by "detectLim"
+	* man/readBeadSummaryOutput.Rd: Additional input parameter
+	'prList'
+	
 Changes in version 1.0.3
 	
 2010-11-02  Lars Gidskehaug  <lg at camo.no>
 
-	* R/beadarrayMSV.R (createAlleleSetFromFiles): Fixed 'genoFile' indexing bug
+	* R/beadarrayMSV.R (createAlleleSetFromFiles): Fixed 'genoFile'
+	indexing bug
 	* man/manualCall.Rd: Removed 'Note'-section
 	* man/beadarrayMSV-package.Rd: Updated maintainer e-mail address
 	and reference to main article

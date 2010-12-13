@@ -15,7 +15,7 @@
 }
 \usage{
 setGenoOptions(largeSample = FALSE, snpPerArrayLim = 0.8,
-    arrayPerSnpLim = 0.8, ploidy = "tetra",
+    arrayPerSnpLim = 0, ploidy = "tetra",
     filterLim = 0, detectLim = 0.8,
     wSpreadLim = suggestGeno(largeSample)$wSpreadLim,
     devCentLim = 0.35,
@@ -62,7 +62,7 @@ callGenotypes.verboseTest(BSRed, singleMarker = 1,
     and the statistics of classification will be missing for these markers
   }
   \item{detectLim}{
-    Ratio of called samples below which markers are classified as \dQuote{FAIL}
+    Ratio of called arrays below which markers are classified as \dQuote{FAIL}
   }
   \item{wSpreadLim}{
     The maximum allowed within cluster standard deviation along
@@ -143,7 +143,7 @@ callGenotypes.verboseTest(BSRed, singleMarker = 1,
   \code{gO$ploidy} sets the allowed  cluster combinations through the function
   \code{\link{generatePolyCenters}}. Data points below the average value
   of the \code{phenoData} column \dQuote{noiseIntensity} across included
-  arrays are set to missing, and samples with standard errors exceeding
+  arrays are set to missing, and arrays with standard errors exceeding
   the quantile given by \code{gO$probsIndSE} are left out from the clustering
   step. Two or three of the most likely cluster combinations are
   estimated with the function \code{\link{getCenters}}. This function
@@ -205,7 +205,7 @@ callGenotypes.verboseTest(BSRed, singleMarker = 1,
   failing any of the tests. Rather, all the test results are plotted and
   returned, revealing which steps can be taken to improve the
   clustering, if any. In these plots, green dots are the estimated
-  centre points, and red and orange dots represent samples outside
+  centre points, and red and orange dots represent arrays outside
   cluster boundaries or within overlapping ellipses,
   respectively. Several markers representing each of the possible
   genotype categories should be investigated in this way before commencing
@@ -248,7 +248,7 @@ callGenotypes.verboseTest(BSRed, singleMarker = 1,
   \item{HW.P }{Probability of Hardy-Weinberg equilibrium}
   \item{BAF.Locus1 }{Estimated B-allele frequency}
   \item{BAF.Locus2 }{Estimated BAF of second paralogue (if exists)}
-  \item{Call.Rate }{Ratio of samples assigned to clusters}
+  \item{Call.Rate }{Ratio of arrays assigned to clusters}
   \item{Manual.Calls.R }{Calls from interactive clustering (if applied)}\cr
   Output from \code{callGenotypes.verboseTest} is a list containing
   \item{call }{The calls from each attempted cluster-combination}

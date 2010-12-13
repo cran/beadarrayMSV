@@ -11,7 +11,7 @@
 \usage{
 readBeadSummaryOutput(arrayNames = NULL, path = ".",
     pattern = "beadTypeFile.txt", recursive = FALSE, sep = ",",
-    fullPaths = NULL, sepchar = "_")
+    fullPaths = NULL, sepchar = "_", prList = NULL)
 }
 \arguments{
   \item{arrayNames}{
@@ -47,6 +47,10 @@ readBeadSummaryOutput(arrayNames = NULL, path = ".",
     Character used to bind togeher different parts of the file-names
     (\dQuote{_} in the above example)
   }
+  \item{prList}{
+    Character vector with Illumina probe-IDs. Should be specified in the
+    rare case that different arrays contain different probes. 
+  }
 }
 \details{
   The scanner protocol must be set to save bead-summary data. The
@@ -56,7 +60,12 @@ readBeadSummaryOutput(arrayNames = NULL, path = ".",
   the bead-type ID and the number of detected beads. The rest contain a
   robust bead-type mean and the standard deviation of the signal for
   each channel.
-
+  
+  The probes found in the first loaded array define \code{prList} unless
+  otherwise specified. A warning is issued if additional probes are
+  found in a subsequent array. It is an error if not all markers in
+  \code{prList} are found in subsequent arrays.
+  
   Much of the functionality is adapted from the
   \pkg{beadarray} package (Dunning \emph{et al.}, 2007). This package is
   an excellent resource for loading and analysing raw Illumina BeadArray
