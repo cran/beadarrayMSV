@@ -793,10 +793,10 @@ createAlleleSetFromFiles <- function(dataFiles,markers,arrays,phenoInfo=NULL,bea
     genoHeader <- c('',unlist(read.table(dataFiles[['genoFile']],nrows=1,as.is=TRUE,sep=sep)))
     genoCols <- rep('NULL',length(genoHeader))
     genoCols[1] <- 'character'
-    genoCols[genoHeader %in% sampleNames] <- 'character'
-    indFound <- sampleNames %in% genoHeader
+    genoCols[genoHeader %in% sampleNames(BSRed)] <- 'character'
+    indFound <- sampleNames(BSRed) %in% genoHeader
     orderA <- order(sort(arrays[indFound],index.return=TRUE)$ix)
-    genotype <- matrix('',nrow=length(markers),ncol=length(arrays),dimnames=list(featureNames,sampleNames))
+    genotype <- matrix('',nrow=length(markers),ncol=length(arrays),dimnames=list(featureNames(BSRed),sampleNames(BSRed)))
     message('Loading genotypes...')
     skip <- min(markers)
     genoFrame <- read.table(dataFiles[['genoFile']],header=FALSE,sep=sep,quote=quote,nrows=max(markers)+1-skip,colClasses=genoCols,skip=skip,row.names=1,col.names=genoHeader)
@@ -931,52 +931,6 @@ createMultiSetFromFiles <- function(dataFiles,markers,arrays,phenoInfo=NULL,bead
 
 
 callGenotypes <- function(BSRed,gO=setGenoOptions(largeSample=ncol(BSRed)>250)){
-# Input parameters:
-# BSRed - AlleleSetIllumina-object
-# gO - List defining all the following parameters:
-#  
-# snpPerArrayLim - Minimum ratio of non-NA markers per array
-# arrayPerSnpLim - Minimum ratio of non-NA arrays per marker
-# ploidy - c('di','tetra')
-# filterLim - Markers with range(theta) below this value is filtered away
-#             (quick way to discard homozygotes).
-# detectLim - The minimum ratio of called genotypes for a marker
-# devCentLim - The maximum allowed deviation in theta between an 'ideal'
-#              and estimated cluster-center
-# wSpreadLim - The maximum allowed MAD along theta within a cluster
-# hwAlpha - Significance level used in Hardy-Weinberg testing. Used to detect
-#           if clustering has failed, and a low value (i.e. 1e-10) shold be
-#           used to allow markers which deviates naturally from HW. This
-#           criterion should be used with caution if e.g. the sample contains
-#           animals from different populations.
-# probsQrange - Quantiles used in the estimation of initial cluster-centers
-#               for AA, AB and BB.
-# probsIndSE - Optionally remove markers with standard errors above given
-#              quantile from clustering. May be set to 'NULL'.
-# afList - At duplicated loci, the observed allele-frequency (AF) is in
-#          fact the mean AF across both paralogues. Several values of AF at
-#          paralogue 1, as given in afList (in [0,.5]), is tested, and the
-#          AF resulting in the best HW-significance is chosen.
-# clAlpha - Significance level controlling the extent of an ellipse
-#           superimposed on each cluster, as estimated with a Hotelling's
-#           T^2-test. Animals falling outside the ellipse are not called,
-#           neither are animals within overlapping ellipses.
-# rPenalty - Scaling-factor for the intensity axis. A high value means the
-#            intensity has less influence in the clustering.
-# rotationLim - Controls the allowed angle of clusters, as defined by
-#               Hotelling's ellipses. A high value means horizontal clusters,
-#               a value of one means circular or angled 45 degrees, and
-#               a value close to zero means upright, well separated clusters.
-#               It is the weighted mean over clusters which is tested. OK test to
-#               fail markers wrongly assigned as monomorphic.
-# minClLim - Clusters below this minimum size are disregarded in the
-#            Hotelling's test (all animals in cluster are included)
-# nSdOverlap - Number of SD defining spread of Theta within cluster
-# minBin - Minimum count to detect peaks in histogram
-# binWidth - Histogram bin-width (controls smoothing/resolution)
-#
-#author L. Gidskehaug (CIGENE), 2009
-
   #Quality control, SNP- and array-filtering
   if ('call' %in% names(assayData(BSRed))){
     OK = FALSE

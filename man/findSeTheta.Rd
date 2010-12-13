@@ -58,16 +58,9 @@ findSeTheta(pooledSE.raw, R, dist = "manhattan", pNorm = NULL)
 \value{
   Matrix of transformed standard errors
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }
-%\note{
-%}
 \seealso{
   \code{\link{cart2pol}}, \code{\link{createAlleleSet}}
 }

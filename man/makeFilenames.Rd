@@ -60,16 +60,9 @@ modifyExistingFilenames(dataFiles, oldtag, newtag)
   \item{resFile }{File name for feature data such as call statistics}
   \item{genoFile }{File name for \code{allele} values}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
 Lars Gidskehaug
 }
-%\note{
-%}
 \section{Warning }{
   Warnings are issued if existing filenames are used, as this may lead
   to overwriting of these files in subsequent steps (no files are

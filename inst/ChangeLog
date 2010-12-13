@@ -1,0 +1,10 @@
+Changes in version 1.0.3
+	
+2010-11-02  Lars Gidskehaug  <lg at camo.no>
+
+	* R/beadarrayMSV.R (createAlleleSetFromFiles): Fixed 'genoFile' indexing bug
+	* man/manualCall.Rd: Removed 'Note'-section
+	* man/beadarrayMSV-package.Rd: Updated maintainer e-mail address
+	and reference to main article
+	* man/*.Rd: Removed references to main article
+	* inst/CITATION: Updated citation-entry

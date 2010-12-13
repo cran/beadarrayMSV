@@ -116,16 +116,9 @@ plotCountsChrom(chromHits, markers = 1:16, \dots)
     matches per marker for mothers and fathers}\cr
   \code{plotCountsChrom} is used for its side effects
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }
-%\note{
-%}
 \seealso{
   \code{\link{plotCountsChrom}}, \code{\link{setMergeOptions}},
   \code{\link{unmixParalogues}}, \code{\link{resolveInheritanceSNP}},

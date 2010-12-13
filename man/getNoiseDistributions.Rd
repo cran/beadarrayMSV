@@ -84,11 +84,6 @@ plotEstimatedNoise(BSData, noiseDist,
 
   \code{plotEstimatedNoise} is used for its side effects
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

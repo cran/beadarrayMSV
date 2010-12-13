@@ -37,11 +37,6 @@ resolveInheritanceSNP(BSSnp)
   \item{mother }{Matrix of calls representing maternal inherited alleles}
   \item{father }{Matrix of calls representing paternal inherited alleles}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

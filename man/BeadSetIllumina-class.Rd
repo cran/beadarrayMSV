@@ -97,11 +97,6 @@ Class \code{"\linkS4class{Versioned}"}, by class "eSet", distance 3.
     %\item{\code{preproc(object)},\code{preproc(object) <- value}:}{See \code{"\link[Biobase:eSet]{eSet}"}}
   }
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

@@ -93,10 +93,6 @@ transformed such that the \dQuote{AA} and \dQuote{BB} homozygotes
 asymptotes are perpendicular to each other
 }
 \references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-  
   D. A. Peiffer \emph{et al.} (2006) High-resolution genomic profiling of
   chromosomal aberations using Infinium whole-genome genotyping,
   \emph{Genome Res.} \bold{16}:1136-1148
@@ -104,8 +100,6 @@ asymptotes are perpendicular to each other
 \author{
   Lars Gidskehaug
 }
-%\note{
-%}
 \seealso{
 \code{\link{preprocessBeadSet}}, \code{\link{setNormOptions}} 
 }

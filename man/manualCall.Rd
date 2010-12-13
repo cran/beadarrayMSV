@@ -67,19 +67,8 @@ manualCall(marker, cntIdeal, classification, gg = NULL, close.gg = TRUE)
   containing marker data including a column \dQuote{Call} with the B
   allele ratio for each subject
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
-}
-\note{
-  If several messages regarding plugin loading errors initially appear on screen while
-  running the function, this may be related to the GGobi installation
-  itself. Please check this before posting bug-reports. Note that the
-  errors may be related to functionality not required by the function
 }
 \seealso{
   \code{\link{ggobi}}, \code{\link{callGenotypes.interactive}}

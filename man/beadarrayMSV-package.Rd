@@ -52,12 +52,12 @@ chromosomes, use \code{\link{assignParalogues}}.
 \author{
 Lars Gidskehaug
 
-Maintainer: Lars Gidskehaug <\email{lars.gidskehaug@umb.no}>
+Maintainer: Lars Gidskehaug \email{lg@camo.no}
 }
 \references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
+  L. Gidskehaug, M. Kent, B. J. Hayes, and S. Lien. (2010) Genotype calling and
   mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
+  SNP-array. \emph{Bioinformatics}, doi: 10.1093/bioinformatics/btq673
 }
 %~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
 %~~ the R documentation directory ~~

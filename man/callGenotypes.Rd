@@ -257,10 +257,6 @@ callGenotypes.verboseTest(BSRed, singleMarker = 1,
   \item{test }{Table of \dQuote{PASS} or \dQuote{FAIL} for each test}
 }
 \references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}\cr
-
   L. Gidskehaug, E. Anderssen, A. Flatberg, and B. K. Alsberg (2007) A
   framework for significance analysis of gene expression data using
   dimension reduction methods. \emph{BMC Bioinformatics} \bold{8}:346\cr

@@ -29,16 +29,9 @@ getNormInd(beadInfo, featureNames, normID = NULL, verbose = TRUE)
     If \code{TRUE}, the sum of each sub-bead pool is printed
   }
 }
-%\details{
-%}
 \value{
   Matrix of size (\code{length(featureNames)} x \code{length(normID)}),
   with logical indices to the sub-bead pool to which each bead-type belongs
-}
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
 }
 \author{
 Lars Gidskehaug
@@ -46,8 +39,6 @@ Lars Gidskehaug
 \note{
   Beads manufactured in different pools should be normalised separately
 }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
   \code{\link{preprocessBeadSet}}, \code{\link{getNoiseDistributions}}

@@ -29,18 +29,11 @@ findClusters(theta, breaks = seq(-0.25, 1.25, 0.05), minBin = 2,
     If \code{TRUE}, histogram is plotted (for testing)
   }
 }
-%\details{
-%}
 \value{
   A list containing
   \item{clPeaks }{Suggested cluster centres}
   \item{clSizes }{Estimated number of samples in each cluster}
   \item{nCl }{Number of clusters}
-}
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
 }
 \author{
   Lars Gidskehaug

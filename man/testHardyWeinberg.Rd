@@ -55,16 +55,9 @@ testHardyWeinberg(sizes, bestConf,
   Data-frame with the chi-square test statistic, the degrees of freedom,
   p-value, and both estimated B allele frequencies
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }
-%\note{
-%}
 \seealso{
   \code{\link{callGenotypes}}
 }

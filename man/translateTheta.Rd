@@ -111,17 +111,9 @@ translateThetaFromFiles(dataFiles, mergedCalls = NULL,
   The function \code{translateThetaFromFiles} are used for its side
   effects.
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }
-%\note{
-%}
-
 \seealso{
   \code{\link{makeDiploidCalls}}, \code{\link{unmixParalogues}},
   \code{\link{assignParalogues}}, \code{\link{makeFilenames}},

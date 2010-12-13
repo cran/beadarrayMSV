@@ -75,11 +75,6 @@ plotGenotypes(BSRed, markers = 1:min(nrow(BSRed), 64),
   effects, however if \code{retFrames} is \code{TRUE} a list of
   data-frames containing the coordinates for each  marker is returned
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

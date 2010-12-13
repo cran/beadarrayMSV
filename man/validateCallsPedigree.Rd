@@ -53,11 +53,6 @@ validateSingleCall(marker, classification)
   Output from \code{validateSingleCall} is a numeric vector with \{0, 1,
   2\} denoting no error, offspring error, and parent error, respectively
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

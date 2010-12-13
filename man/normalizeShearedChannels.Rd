@@ -42,10 +42,6 @@ normalizeShearedChannels(trChannel, noiseDist,
   normalization performed
 }
 \references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-  
   S. Macgregor \emph{et al.} (2008) Highly cost-efficient genome-wide
   association studies using DNA pools and dense SNP
   arrays. \emph{Nucleic Acids Res.} \bold{36}(6):e35

@@ -50,17 +50,9 @@ transformSEs(X, se.X, normOpts = setNormOptions())
   \item{SE }{Estimated standard errors of transformed signal mean}
   \item{lstr }{Character string with description of transformation}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }
-%\note{
-%}
-
 \seealso{
   \code{\link{preprocessBeadSet}}
 }

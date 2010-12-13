@@ -54,11 +54,6 @@ getSpecificCenters(theta, classification, gO = setGenoOptions(),
   The function \code{getSpecificCenters} returns a numeric vector of
   clustering starting values
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

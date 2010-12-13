@@ -75,10 +75,6 @@ readBeadSummaryOutput(arrayNames = NULL, path = ".",
   M. J. Dunning \emph{et al.} (2007) beadarray: R classes
   and methods for Illumina bead-based data. \emph{Bioinformatics}
   \bold{23}(16):2183-4
-
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
 }
 \author{
 Lars Gidskehaug

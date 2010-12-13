@@ -109,11 +109,6 @@ assignToAlleleSet(BSRed, BSAdd)
 \value{
   Object of class \code{"\linkS4class{AlleleSetIllumina}"} or \code{"\linkS4class{MultiSet}"}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

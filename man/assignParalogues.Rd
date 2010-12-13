@@ -152,11 +152,6 @@ assignParalogues(BSSnp, BSRed,
   \item{positionMale}{a matrix holding the mapped paralogue positions
     as estimated by the male parent half-sib families}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

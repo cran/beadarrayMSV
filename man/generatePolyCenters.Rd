@@ -31,16 +31,9 @@ generatePolyCenters(ploidy)
   \item{size }{Numeric vector with the maximum number of clusters within
     each category}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }
-%\note{
-%}
 \seealso{
   \code{\link{callGenotypes}}, \code{\link{getCenters}},
   \code{\link{testHardyWeinberg}}, \code{\link{plotGenotypes}} 

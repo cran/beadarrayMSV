@@ -60,11 +60,6 @@ unmixParalogues(BSRed, singleCalls = getSingleCalls(BSRed))
   \dQuote{_Para2}. Critically, these names are NOT consistent between the
   tables 
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

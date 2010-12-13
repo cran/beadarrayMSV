@@ -31,11 +31,6 @@ countFailedSNP(BSRed, inclPedErrors = TRUE)
   \code{phenoData} column \dQuote{passRatio}. This is a numeric vector
   holding the ratio of non-missing calls for each array
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

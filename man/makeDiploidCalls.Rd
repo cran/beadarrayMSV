@@ -34,11 +34,6 @@ makeDiploidCalls(calls, fData)
   A numerical matrix with the same dimensions as \code{calls}, however
   with values restricted to \{0, 1/2, 1\}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

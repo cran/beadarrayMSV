@@ -54,11 +54,6 @@ findPolyploidClusters(X, indSE = rep(TRUE, nrow(X)), centers,
 \value{
   Object of class \code{"\link{kmeans}"}
 }
-\references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}
-}
 \author{
   Lars Gidskehaug
 }

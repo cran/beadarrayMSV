@@ -166,10 +166,6 @@ preprocessBeadSet(BSData, normInd,
   \code{nSD}
 }
 \references{
-  L. Gidskehaug, M. Kent, B. Hayes, and S. Lien. Genotype calling and
-  mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \bold{Submitted}\cr
-  
   G. K. Smyth and T. P. Speed. (2003) Normalization of cDNA
   microarray data. \emph{Methods} \bold{31}:265-27
 }
