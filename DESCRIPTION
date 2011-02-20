@@ -1,8 +1,8 @@
 Package: beadarrayMSV
 Type: Package
 Title: Analysis of Illumina BeadArray SNP data including MSV markers
-Version: 1.0.4.1
-Date: 2010-13-12
+Version: 1.1.0
+Date: 2011-02-20
 Author: Lars Gidskehaug
 Maintainer: Lars Gidskehaug <lg@camo.no>
 Description: Imports bead-summary data from Illumina scanner.
@@ -21,6 +21,6 @@ LazyData: no
 Depends: R (>= 2.10.0), Biobase (>= 2.5.5), methods, geneplotter
 Imports: rggobi, limma
 SystemRequirements: GGobi
+Packaged: 2011-02-20 19:07:04 UTC; gidskeha
 Repository: CRAN
-Date/Publication: 2011-02-18 19:17:46
-Packaged: 2011-02-16 08:01:51 UTC; ripley
+Date/Publication: 2011-02-21 06:44:19

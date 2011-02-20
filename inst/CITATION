@@ -6,12 +6,14 @@ citEntry(entry="article",
     author = "Lars Gidskehaug and Matthew Kent and Ben J. Hayes and
     Sigbjorn Lien",
     journal = "Bioinformatics",
-    year = "2010",
-    note = "doi: 10.1093/bioinformatics/btq673",
+    year = "2011",
+    volume="27",
+    number="3",
+    pages="303-310",
     textVersion = paste("Gidskehaug, L., Kent, M., Hayes, B. J., Lien, S.",
-    		"(2010) Genotype calling and mapping of multisite variants using an",
+    		"(2011) Genotype calling and mapping of multisite variants using an",
 		"Atlantic salmon iSelect SNP-array, Bioinformatics,",
-    		"doi: 10.1093/bioinformatics/btq673")
+    		"27(3):303-310")
     )
 
 citFooter("This free software implements academic research by the

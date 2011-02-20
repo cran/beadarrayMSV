@@ -69,9 +69,9 @@ Formal class 'AlleleSetIllumina' [package \pkg{beadarrayMSV}] with 7 slots\cr
 %\details{
 %}
 \source{
-  L. Gidskehaug, M. Kent, B. J. Hayes, and S. Lien. (2010) Genotype calling and
+  L. Gidskehaug, M. Kent, B. J. Hayes, and S. Lien. (2011) Genotype calling and
   mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \emph{Bioinformatics}, doi: 10.1093/bioinformatics/btq673
+  SNP-array. \emph{Bioinformatics}, 27(3):303-310
 }
 %\references{
 %}

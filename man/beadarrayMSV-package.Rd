@@ -17,8 +17,8 @@
 \tabular{ll}{
 Package: \tab \pkg{beadarrayMSV}\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2010-01-09\cr
+Version: \tab 1.1\cr
+Date: \tab 2011-02-20\cr
 License: \tab GPL (>=2)\cr
 LazyLoad: \tab yes\cr
 LazyData: \tab no\cr
@@ -55,9 +55,9 @@ Lars Gidskehaug
 Maintainer: Lars Gidskehaug \email{lg@camo.no}
 }
 \references{
-  L. Gidskehaug, M. Kent, B. J. Hayes, and S. Lien. (2010) Genotype calling and
+  L. Gidskehaug, M. Kent, B. J. Hayes, and S. Lien. (2011) Genotype calling and
   mapping of multisite variants using an Atlantic salmon iSelect
-  SNP-array. \emph{Bioinformatics}, doi: 10.1093/bioinformatics/btq673
+  SNP-array. \emph{Bioinformatics}, 27(3):303-310
 }
 %~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
 %~~ the R documentation directory ~~

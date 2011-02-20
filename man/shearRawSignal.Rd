@@ -94,7 +94,7 @@ asymptotes are perpendicular to each other
 }
 \references{
   D. A. Peiffer \emph{et al.} (2006) High-resolution genomic profiling of
-  chromosomal aberations using Infinium whole-genome genotyping,
+  chromosomal aberrations using Infinium whole-genome genotyping,
   \emph{Genome Res.} \bold{16}:1136-1148
 }
 \author{

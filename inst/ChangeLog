@@ -1,3 +1,19 @@
+Changes in version 1.1.0
+
+2010-02-20  Lars Gidskehaug  <lg at camo.no>
+
+	* man/beadarrayMSV-package.Rd: Updated reference to main article
+	* man/BSRed.193.Rd: Updated reference to main article
+	* inst/CITATION: Updated citation-entry
+	* data/BSRed.193.RData: Better compression
+	* data/datalist: Added file for faster installation
+	* extdata/*: xz-compression of most data-files. Removal of a few
+	large files
+
+	
+---///---
+
+	
 Changes in version 1.0.4
 
 2010-12-14  Lars Gidskehaug  <lg at camo.no>
@@ -11,14 +27,14 @@ Changes in version 1.0.4
 	parameter 'prList' in order to cope with varying number of probes
 	on different arrays
 	* R/beadarrayMSV.R (callGenotypes.verboseTest): More informative
-	output 
+	output
 	* R/beadarrayMSV.R (setGenoOptions): Default "arrayPerSnpLim"
 	set to zero, as this is covered by "detectLim"
 	* man/readBeadSummaryOutput.Rd: Additional input parameter
 	'prList'
-	
+
 Changes in version 1.0.3
-	
+
 2010-11-02  Lars Gidskehaug  <lg at camo.no>
 
 	* R/beadarrayMSV.R (createAlleleSetFromFiles): Fixed 'genoFile'
